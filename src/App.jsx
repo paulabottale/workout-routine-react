@@ -9,6 +9,33 @@ function App() {
     workoutTime:""
   })
 
+  const [result, setResult] = useState("")
+
+  function generateRoutine() {
+    const {personName, personAge, workoutLevel, workoutTime} = formData
+
+    //validaciones
+    if(!personName) return setResult("Please enter a valid name")
+    if(!personAge || personAge <= 0) return setResult("Please enter a valid age")
+    if(personAge < 15) return setResult("You have to be older than 15 to workout")
+    if(!workoutLevel) return setResult("Please select a workout level")
+    if(!workoutTime || workoutTime <= 0) return setResult("Please enter a valid workout time")
+
+    //tipo de rutina
+    let routineModel = ""
+    if (workoutLevel === "beginner") routineModel = "light full body routine"
+    else if (workoutLevel === "intermediate") routineModel = "moderate routine by muscle groups"
+    else if (workoutLevel === "advanced") routineModel = "intense routine by muscle groups"
+
+    //ajuste por tiempo
+    if (workoutTime < 30) routineModel += " (quick session)"
+    else if (workoutTime <= 60) routineModel += " (standard session)"
+    else routineModel += " (complete session)"
+
+    setResult(`${personName}, your recommended routine is: ${routineModel}`)
+
+  }
+
   return (
     <div>
       <h1>Smart Workout Planner</h1>
@@ -45,7 +72,9 @@ function App() {
       onChange={(e) => setFormData({...formData,workoutTime: e.target.value})}
       />
 
-      <button onClick={() => console.log(formData)}>Generate Routine</button>
+      <button onClick={generateRoutine}>Generate Routine</button>
+
+      {result && <p>{result}</p>}
 
     </div>
     )
