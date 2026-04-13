@@ -1,16 +1,28 @@
-# React + Vite
+# Workout Routine Generator — React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React migration of the original JavaScript workout routine generator. The app takes user input to generate a personalized training routine, with input validation and conditional logic handled through React components, state, and hooks.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- User inputs: full name, age, training level, and available workout time
+- Personalized routine generation based on user selections
+- Input validation:
+  - Minors (under 18) are not allowed to generate a routine
+  - Age and workout time must be greater than 0
+- Built with React + Vite
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+React · JavaScript · HTML · CSS · Vite
 
-## Expanding the ESLint configuration
+## Status
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🚧 Work in progress — migrated from vanilla JavaScript to React as a learning exercise focused on components, state management, and hooks.
+
+## Original Version
+
+The original vanilla JavaScript version is available here: [workout-routine-generator-js](https://github.com/paulabottale/workout-routine-generator-js)
+
+## Author
+
+**Paula Bottale** — [LinkedIn](https://linkedin.com/in/paula-bottale) · [GitHub](https://github.com/paulabottale)
