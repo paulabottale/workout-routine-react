@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import WorkoutForm from '../components/WorkoutForm'
 import RoutineDisplay from '../components/RoutineDisplay'
+import { Link } from 'react-router-dom'
 
 function HomeScreen() {
   const [formData, setFormData] = useState({
@@ -36,6 +37,7 @@ function HomeScreen() {
   return (
     <div>
       <h1>Smart Workout Planner</h1>
+      <Link to="/history">Ver historial</Link>
       <WorkoutForm
         formData={formData}
         setFormData={setFormData}
