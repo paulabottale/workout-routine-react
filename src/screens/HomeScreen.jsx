@@ -3,7 +3,7 @@ import WorkoutForm from '../components/WorkoutForm'
 import RoutineDisplay from '../components/RoutineDisplay'
 import { Link } from 'react-router-dom'
 
-function HomeScreen() {
+function HomeScreen({history, setHistory}) {
   const [formData, setFormData] = useState({
     personName: "",
     personAge: "",
@@ -30,6 +30,14 @@ function HomeScreen() {
     if (workoutTime < 30) tipoDeRutina += " (quick session)"
     else if (workoutTime <= 60) tipoDeRutina += " (standard session)"
     else tipoDeRutina += " (complete session)"
+
+    const newEntry = {
+      id: Date.now(),
+      name: personName,
+      routine: tipoDeRutina
+    }
+
+    setHistory([...history, newEntry])
 
     setResult(`${personName}, your recommended routine is: ${tipoDeRutina}`)
   }
