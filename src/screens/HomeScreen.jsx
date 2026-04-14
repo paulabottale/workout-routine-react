@@ -43,17 +43,19 @@ function HomeScreen({history, setHistory}) {
   }
 
   return (
-    <div>
-      <h1>Smart Workout Planner</h1>
-      <Link to="/history">Ver historial</Link>
-      <WorkoutForm
-        formData={formData}
-        setFormData={setFormData}
-        generateRoutine={generateRoutine}
-      />
-      <RoutineDisplay result={result} />
-    </div>
-  )
+  <div className="min-h-screen bg-stone-100 text-stone-800 flex flex-col items-center py-10 px-4">
+    <h1 className="text-4xl font-bold mb-8 text-stone-900">Smart Workout Planner 💪</h1>
+    <Link to="/history" className="mb-6 text-pink-400 hover:text-pink-300 underline">
+      Ver historial
+    </Link>
+    <WorkoutForm
+      formData={formData}
+      setFormData={setFormData}
+      generateRoutine={generateRoutine}
+    />
+    <RoutineDisplay result={result} />
+  </div>
+)
 }
 
 export default HomeScreen
