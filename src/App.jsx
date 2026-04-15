@@ -1,10 +1,23 @@
 import { Routes, Route } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import HomeScreen from './screens/HomeScreen'
 import HistoryScreen from './screens/HistoryScreen'
 
 function App() {
   const [history, setHistory] = useState([])
+
+  useEffect(() => {
+  const savedHistory = localStorage.getItem("workoutHistory")
+  if (savedHistory) {
+    setHistory(JSON.parse(savedHistory))
+  }
+}, [])
+
+useEffect(() => {
+  if (history.length > 0) {
+    localStorage.setItem("workoutHistory", JSON.stringify(history))
+  }
+}, [history])
 
   return (
     <Routes>
