@@ -31,16 +31,25 @@ function HomeScreen({history, setHistory}) {
     else if (workoutTime <= 60) tipoDeRutina += " (standard session)"
     else tipoDeRutina += " (complete session)"
 
+    const now = new Date()
+    const hours = now.getHours().toString().padStart(2, '0')
+    const minutes = now.getMinutes().toString().padStart(2, '0')
+    const day = now.getDate().toString().padStart(2, '0')
+    const month = (now.getMonth() + 1).toString().padStart(2, '0')
+
     const newEntry = {
-      id: Date.now(),
-      name: personName,
-      routine: tipoDeRutina
-    }
-
-    setHistory([...history, newEntry])
-
-    setResult(`${personName}, your recommended routine is: ${tipoDeRutina}`)
+    id: Date.now(),
+    name: personName,
+    routine: tipoDeRutina,
+    date: `${day}/${month}`,
+    time: `${hours}:${minutes}`
   }
+
+setHistory([...history, newEntry])
+
+setResult(`${personName}, your recommended routine is: ${tipoDeRutina}`)
+
+}
 
   return (
   <div className="min-h-screen bg-stone-100 text-stone-800 flex flex-col items-center py-10 px-4">

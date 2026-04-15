@@ -19,10 +19,29 @@ useEffect(() => {
   }
 }, [history])
 
+function clearHistory() {
+  setHistory([])
+  localStorage.removeItem("workoutHistory")
+}
+
+function deleteEntry(id) {
+  setHistory(prev => {
+    const updated = prev.filter(entry => entry.id !== id)
+    localStorage.setItem("workoutHistory", JSON.stringify(updated))
+    return updated
+  })
+}
+
   return (
     <Routes>
       <Route path="/" element={<HomeScreen history={history} setHistory={setHistory} />} />
-      <Route path="/history" element={<HistoryScreen history={history} />} />
+      <Route path="/history" element={
+        <HistoryScreen 
+        history={history} 
+        clearHistory={clearHistory}
+        deleteEntry={deleteEntry}
+        />} 
+      />
     </Routes>
   )
 }
