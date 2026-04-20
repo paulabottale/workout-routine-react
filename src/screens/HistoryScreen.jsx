@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import ReactMarkdown from 'react-markdown'
 
 function HistoryScreen({ history, clearHistory, deleteEntry }) {
   const [showModal, setShowModal] = useState(false)
@@ -29,7 +30,6 @@ function HistoryScreen({ history, clearHistory, deleteEntry }) {
     setShowModal(false)
     setEntryToDelete(null)
   }
-
 
   return (
     <div className="min-h-screen bg-stone-100 text-stone-800 flex flex-col items-center py-10 px-4">
@@ -67,7 +67,9 @@ function HistoryScreen({ history, clearHistory, deleteEntry }) {
                 </button>
               </div>
             </div>
-            <p className="text-stone-600 text-sm">{entry.routine}</p>
+            <div className="text-stone-600 text-sm">
+              <ReactMarkdown>{entry.routine}</ReactMarkdown>
+            </div>
           </div>
         ))}
       </div>
@@ -76,8 +78,8 @@ function HistoryScreen({ history, clearHistory, deleteEntry }) {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white rounded-xl px-8 py-6 max-w-sm w-full mx-4 flex flex-col gap-4">
             <p className="text-stone-900 font-semibold text-center">
-              {entryToDelete 
-                ? "Are you sure you want to delete this routine?" 
+              {entryToDelete
+                ? "Are you sure you want to delete this routine?"
                 : "Are you sure you want to clear all history?"
               }
             </p>

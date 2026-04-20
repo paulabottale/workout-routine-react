@@ -13,42 +13,53 @@ function HomeScreen({history, setHistory}) {
 
   const [result, setResult] = useState("")
 
-  function generateRoutine() {
-    const { personName, personAge, workoutLevel, workoutTime } = formData
+  async function generateRoutine() {
+  const { personName, personAge, workoutLevel, workoutTime } = formData
 
-    if (!personName) return setResult("Please enter a valid name")
-    if (!workoutLevel) return setResult("Please select a workout level")
-    if (!workoutTime || workoutTime <= 0) return setResult("Please enter a valid workout time")
-    if (!personAge || personAge <= 0) return setResult("Please enter a valid age")
-    if (personAge < 15) return setResult("You have to be older than 15 years old to workout")
+  if (!personName) return setResult("Please enter a valid name")
+  if (!workoutLevel) return setResult("Please select a workout level")
+  if (!workoutTime || workoutTime <= 0) return setResult("Please enter a valid workout time")
+  if (!personAge || personAge <= 0) return setResult("Please enter a valid age")
+  if (personAge < 15) return setResult("You have to be older than 15 years old to workout")
 
-    let tipoDeRutina = ""
-    if (workoutLevel === "beginner") tipoDeRutina = "light full body routine"
-    else if (workoutLevel === "intermediate") tipoDeRutina = "moderate routine by muscle groups"
-    else if (workoutLevel === "advanced") tipoDeRutina = "intense routine by muscle groups"
+  setResult("Generating your routine... 💪")
 
-    if (workoutTime < 30) tipoDeRutina += " (quick session)"
-    else if (workoutTime <= 60) tipoDeRutina += " (standard session)"
-    else tipoDeRutina += " (complete session)"
+  try {
+    const response = await fetch('http://localhost:3001/api/routine', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        personName,
+        personAge,
+        workoutLevel,
+        workoutTime
+      })
+    })
 
-    const now = new Date()
-    const hours = now.getHours().toString().padStart(2, '0')
-    const minutes = now.getMinutes().toString().padStart(2, '0')
-    const day = now.getDate().toString().padStart(2, '0')
-    const month = (now.getMonth() + 1).toString().padStart(2, '0')
+    const data = await response.json()
+    setResult(data.routine)
 
-    const newEntry = {
+  const now = new Date()
+  const hours = now.getHours().toString().padStart(2, '0')
+  const minutes = now.getMinutes().toString().padStart(2, '0')
+  const day = now.getDate().toString().padStart(2, '0')
+  const month = (now.getMonth() + 1).toString().padStart(2, '0')
+
+  const newEntry = {
     id: Date.now(),
     name: personName,
-    routine: tipoDeRutina,
+    routine: data.routine,
     date: `${day}/${month}`,
     time: `${hours}:${minutes}`
   }
 
-setHistory([...history, newEntry])
-
-setResult(`${personName}, your recommended routine is: ${tipoDeRutina}`)
-
+  setHistory(prev => [...prev, newEntry])
+  
+} catch (error) {
+    setResult("Error connecting to server. Please try again.")
+  }
 }
 
   return (
