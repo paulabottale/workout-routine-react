@@ -25,7 +25,7 @@ function HomeScreen({history, setHistory}) {
   setResult("Generating your routine... 💪")
 
   try {
-    const response = await fetch('http://localhost:3001/api/routine', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/routine`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
