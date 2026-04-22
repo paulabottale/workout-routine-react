@@ -28,7 +28,8 @@ function HomeScreen({history, setHistory}) {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/api/routine`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'x-api-key': import.meta.env.VITE_CLIENT_API_KEY
       },
       body: JSON.stringify({
         personName,
