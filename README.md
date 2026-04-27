@@ -1,27 +1,98 @@
-# Workout Routine Generator — React
+# Smart Workout Planner 💪
 
-A React migration of the original JavaScript workout routine generator. The app takes user input to generate a personalized training routine, with input validation and conditional logic handled through React components, state, and hooks.
+An AI-powered full stack web application that generates personalised workout routines using Claude AI (Anthropic API).
+
+🔗 **Live Demo:** [workout-routine-react.vercel.app](https://workout-routine-react.vercel.app/)
+
+---
+
+## How It Works
+
+1. The user fills out a form with their name, age, fitness level, and available time
+2. The React frontend sends the data to a Node.js/Express backend
+3. The backend securely calls the Claude AI API (Anthropic) — API keys are never exposed to the frontend
+4. Claude generates a personalised workout routine in real time
+5. The result is displayed in the app and saved to the workout history
+
+---
 
 ## Features
 
-- User inputs: full name, age, training level, and available workout time
-- Personalized routine generation based on user selections
-- Input validation:
-  - Minors (under 18) are not allowed to generate a routine
-  - Age and workout time must be greater than 0
-- Built with React + Vite
+- 🤖 **AI-generated routines** — powered by Claude AI (Anthropic API)
+- 📋 **Workout history** — persisted in localStorage with date and time stamps
+- 🗑️ **History management** — delete individual entries or clear all history
+- ✅ **Modal confirmations** — custom modal dialogs for destructive actions
+- 📱 **Responsive design** — built with Tailwind CSS
+- 🔒 **Secure backend** — API key middleware + rate limiting (5 requests / 15 min per IP)
+
+---
 
 ## Tech Stack
 
-React · JavaScript · HTML · CSS · Vite
+### Frontend
+- React (Vite)
+- React Router DOM
+- Tailwind CSS
+- useState · useEffect · localStorage
+- react-markdown
+- Deployed on **Vercel**
 
-## Status
+### Backend
+- Node.js · Express.js
+- Claude AI (Anthropic API)
+- express-rate-limit
+- dotenv · CORS
+- Deployed on **Render**
 
-🚧 Work in progress — migrated from vanilla JavaScript to React as a learning exercise focused on components, state management, and hooks.
+---
 
-## Original Version
+## Project Structure
 
-The original vanilla JavaScript version is available here: [workout-routine-generator-js](https://github.com/paulabottale/workout-routine-generator-js)
+This project uses two separate repositories:
+
+| Repo | Description |
+|------|-------------|
+| [workout-routine-react](https://github.com/paulabottale/workout-routine-react) | React frontend |
+| [workout-routine-backend](https://github.com/paulabottale/workout-routine-backend) | Node.js/Express backend |
+
+---
+
+## Environment Variables
+
+### Frontend (.env)
+```
+VITE_API_URL=https://your-backend-url.onrender.com
+VITE_CLIENT_API_KEY=your-client-api-key
+```
+
+### Backend (.env)
+```
+ANTHROPIC_API_KEY=your-anthropic-api-key
+CLIENT_API_KEY=your-client-api-key
+PORT=3001
+```
+
+---
+
+## Getting Started
+
+### Frontend
+```bash
+git clone https://github.com/paulabottale/workout-routine-react
+cd workout-routine-react
+npm install
+npm run dev
+```
+
+### Backend
+```bash
+git clone https://github.com/paulabottale/workout-routine-backend
+cd workout-routine-backend
+npm install
+npm run dev
+```
+
+---
 
 ## Author
 
